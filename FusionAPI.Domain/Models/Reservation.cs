@@ -13,6 +13,7 @@ namespace FusionAPI.Domain.Models
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
 
+        public int UserId { get; set; }
         public required virtual User CreatedBy { get; set; }
 
         public string CreatedByName { get; set; } = string.Empty;
