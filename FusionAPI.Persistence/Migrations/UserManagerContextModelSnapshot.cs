@@ -48,7 +48,7 @@ namespace FusionAPI.Persistence.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Reservations");
+                    b.ToTable("Reservations", (string)null);
                 });
 
             modelBuilder.Entity("FusionAPI.Domain.Models.User", b =>
@@ -77,7 +77,7 @@ namespace FusionAPI.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("FusionAPI.Domain.Models.Reservation", b =>

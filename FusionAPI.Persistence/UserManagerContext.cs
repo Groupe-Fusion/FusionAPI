@@ -14,13 +14,13 @@ namespace FusionAPI.Persistence
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Reservation>()
-                .HasOne(r => r.CreatedBy)
+                .HasOne(r => r.User)
                 .WithMany(u => u.Reservations)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<User>()
                 .HasMany(b => b.Reservations)
-                .WithOne(r => r.CreatedBy)
+                .WithOne(r => r.User)
                 .OnDelete(DeleteBehavior.Cascade);
         }
     }

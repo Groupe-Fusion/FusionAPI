@@ -15,7 +15,7 @@ namespace FusionAPI.Persistence.Seeding.Fakers
             //RuleFor(r => r.ReservationId, f => f.UniqueIndex);
             RuleFor(r => r.Name, f => f.Commerce.ProductName());
             RuleFor(r => r.Description, f => f.Lorem.Sentence());
-            RuleFor(r => r.CreatedBy, f => new UserFaker().Generate());
+            RuleFor(r => r.User, f => new UserFaker().Generate());
             RuleFor(r => r.CreatedByName, f => f.Person.FullName);
         }
     }
