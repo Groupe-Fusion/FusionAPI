@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "FusionAPI.Domain": {
+      "commandName": "Project"
+    },
+    "Profil 1": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Users\\r.germain\\source\\repos\\FusionAPI\\FusionAPI\\Program.cs"
+    }
+  }
+}

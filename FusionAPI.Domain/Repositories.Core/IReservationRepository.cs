@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FusionAPI.Domain.Models;
+﻿using FusionAPI.Domain.Models;
 
 namespace FusionAPI.Domain.Repositories.Core
 {
     public interface IReservationRepository
     {
         Task<List<Reservation>> GetAllReservationsAsync(CancellationToken ct = default);
+        Task<Reservation?> GetReservationByIdAsync(int userId, CancellationToken ct = default);
+        Task<Reservation> AddReservationAsync(Reservation reservation, CancellationToken ct = default);
+        Task<Reservation> UpdateReservationAsync(Reservation reservation, CancellationToken ct = default);
+        Task<Reservation> DeleteReservationAsync(int userId, CancellationToken ct = default);
     }
 }

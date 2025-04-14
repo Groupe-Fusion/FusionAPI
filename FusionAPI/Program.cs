@@ -29,9 +29,16 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // fusion inject use cases
-builder.Services.AddTransient<IAddUserUseCase, AddUserUseCase>();
-builder.Services.AddTransient<IGetAllUsersUseCase, GetAllUsersUseCase>();
-builder.Services.AddTransient<IGetUserByIdUseCase, GetUserByIdUseCase>();
+builder.Services.AddTransient<IAddReservationUseCase, AddReservationUseCase>();
+builder.Services.AddTransient<IGetAllReservationsUseCase, GetAllReservationsUseCase>();
+builder.Services.AddTransient<IGetReservationByIdUseCase, GetReservationByIdUseCase>();
+builder.Services.AddTransient<IDeleteReservationUseCase, DeleteReservationUseCase>();
+
+// Add HttpClient service
+builder.Services.AddHttpClient("ReservationService", client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ExternalServices:ReservationService:Url"]);
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
