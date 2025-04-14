@@ -26,6 +26,7 @@ ConfigureDbContext<UserManagerContext>(builder.Services, builder.Configuration);
 
 // fusion inject repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // fusion inject use cases
 builder.Services.AddTransient<IAddUserUseCase, AddUserUseCase>();
