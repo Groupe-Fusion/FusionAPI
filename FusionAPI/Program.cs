@@ -1,5 +1,6 @@
 ﻿using FusionAPI.Applicatif.Core;
 using FusionAPI.Applicatif.UseCases;
+using FusionAPI.Domain.Models;
 using FusionAPI.Domain.Repositories.Core;
 using FusionAPI.Persistence;
 using FusionAPI.Persistence.Repositories;
@@ -23,6 +24,12 @@ void ConfigureDbContext<TContext>(IServiceCollection services, IConfiguration co
 }
 
 ConfigureDbContext<UserManagerContext>(builder.Services, builder.Configuration);
+
+// ajout mongoDB service
+builder.Services.Configure<LocalisationDatabaseSettings>(
+    builder.Configuration.GetSection("LocalisationDatabase"));
+
+builder.Services.AddSingleton<LocalisationRepository>();
 
 // fusion inject repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
