@@ -2,15 +2,12 @@
 
 net8.0
 
-Dans cette branche : Controller pour le service USER
+Dans cette branche : Controller pour le service LOCALISATION 
 
-Toutes les migrations vont être pour le moment faites ici je pense 
+La BDD se situe sur mongoDB si vous voulez l'accès envoyer un message à Roman avec votre adresse mail
 
-# Table USERS :
+# Table LOCALISATIONS :
 
-![image](https://github.com/user-attachments/assets/669f026d-7dc4-40cc-92e6-96dbce71f334)
+![image](https://github.com/user-attachments/assets/59465272-89b6-488c-a6db-a77f069d8d1c)
 
 
-# Table Reservations : 
-
-![image](https://github.com/user-attachments/assets/3498ccc7-41fa-410e-a50c-db76dd6f3e6a)
