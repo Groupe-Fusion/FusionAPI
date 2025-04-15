@@ -1,10 +1,11 @@
 ﻿using FusionAPI.Domain.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using FusionAPI.Domain.Repositories.Core;
 
 namespace FusionAPI.Persistence.Repositories
 {
-    public class LocalisationRepository
+    public class LocalisationRepository : ILocalisationRepository
     {
         private readonly IMongoCollection<Localisation> _localisationsCollection;
 
@@ -41,10 +42,12 @@ namespace FusionAPI.Persistence.Repositories
             throw new Exception("Failed to update the localisation.");
         }
 
-        public async Task<bool> DeleteLocalisationAsync(string id, CancellationToken ct = default)
+        public async Task<Localisation> DeleteLocalisationAsync(string id, CancellationToken ct = default)
         {
             var result = await _localisationsCollection.DeleteOneAsync(x => x.LocalisationId == id, ct);
-            return result.IsAcknowledged && result.DeletedCount > 0;
+            return result.IsAcknowledged && result.DeletedCount > 0
+                ? new Localisation { LocalisationId = id }
+                : throw new Exception("Failed to delete the localisation.");
         }
     }
 }

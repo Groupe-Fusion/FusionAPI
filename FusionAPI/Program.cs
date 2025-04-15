@@ -6,6 +6,7 @@ using FusionAPI.Persistence;
 using FusionAPI.Persistence.Repositories;
 using FusionAPI.Persistence.Seeding;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +35,7 @@ builder.Services.AddSingleton<LocalisationRepository>();
 // fusion inject repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-
-// fusion inject use cases
+builder.Services.AddScoped<ILocalisationRepository, LocalisationRepository>();
 
 
 // Add services to the container.
