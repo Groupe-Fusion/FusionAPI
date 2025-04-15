@@ -36,9 +36,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // fusion inject use cases
-builder.Services.AddTransient<IAddUserUseCase, AddUserUseCase>();
-builder.Services.AddTransient<IGetAllUsersUseCase, GetAllUsersUseCase>();
-builder.Services.AddTransient<IGetUserByIdUseCase, GetUserByIdUseCase>();
+
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -59,24 +57,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-void MigrateAndSeedDatabase<TContext>(IServiceProvider services) where TContext : DbContext
-{
-    using var scope = services.CreateScope();
-    var context = scope.ServiceProvider.GetService<TContext>()!;
-    context.Database.Migrate();
-
-    if (typeof(TContext) == typeof(UserManagerContext))
-    {
-        Console.WriteLine("Pre seeding database");
-        DbSeeder.Initialize(scope.ServiceProvider);
-    }
-}
-
-// auto migrate and seed database
-MigrateAndSeedDatabase<UserManagerContext>(app.Services);
-
-//connection string
-//Console.WriteLine(app.Configuration.GetConnectionString("Default"));
 
 app.Run();
