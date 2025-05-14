@@ -30,6 +30,9 @@ namespace FusionAPI.Presentation.Controllers
                     Email = newUser.Email,
                     FirstName = newUser.FirstName,
                     LastName = newUser.LastName,
+                    PhoneNumber = newUser.PhoneNumber,
+                    ConfirmPassword = newUser.ConfirmPassword,
+                    AcceptConditions = newUser.AcceptConditions,
                     Password = newUser.Password
                 };
 
