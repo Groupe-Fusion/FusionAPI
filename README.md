@@ -8,7 +8,8 @@ Toutes les migrations vont être pour le moment faites ici je pense
 
 # Table USERS :
 
-![image](https://github.com/user-attachments/assets/669f026d-7dc4-40cc-92e6-96dbce71f334)
+![image](https://github.com/user-attachments/assets/cc29253b-c537-4b85-badd-1c8eee88a086)
+
 
 
 # Table Reservations : 
