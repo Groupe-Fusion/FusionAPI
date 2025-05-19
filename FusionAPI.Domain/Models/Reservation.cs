@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FusionAPI.Domain.Models
+﻿namespace FusionAPI.Domain.Models
 {
     public class Reservation
     {
@@ -17,5 +10,12 @@ namespace FusionAPI.Domain.Models
         public required virtual User User { get; set; }
 
         public string CreatedByName { get; set; } = string.Empty;
+        public string StartLocation { get; set; } = string.Empty;
+        public string EndLocation { get; set; } = string.Empty;
+        public string Dimension { get; set; } = string.Empty;
+        public int Weight { get; set; }
+        public bool IsNow { get; set; } = false;
+        public DateTime DeliveryDate { get; set; } = DateTime.Now;
+
     }
 }

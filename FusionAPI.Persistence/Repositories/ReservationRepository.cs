@@ -19,9 +19,9 @@ namespace FusionAPI.Persistence.Repositories
             return reservation;
         }
 
-        public async Task<Reservation> DeleteReservationAsync(int userId, CancellationToken ct = default)
+        public async Task<Reservation> DeleteReservationAsync(int reservationId, CancellationToken ct = default)
         {
-            var reservation = await GetReservationByIdAsync(userId, ct);
+            var reservation = await GetReservationByIdAsync(reservationId, ct);
             if (reservation is null)
                 throw new ArgumentNullException("No reservation found with these id");
 
@@ -36,11 +36,10 @@ namespace FusionAPI.Persistence.Repositories
         }
 
         //TODO modifs
-        public Task<Reservation?> GetReservationByIdAsync(int userId, CancellationToken ct = default)
+        public Task<Reservation?> GetReservationByIdAsync(int reservationId, CancellationToken ct = default)
         {
             return _context.Reservations
-                .Include(r => r.UserId)
-                .FirstOrDefaultAsync(x => x.UserId == userId, ct);
+                .FirstOrDefaultAsync(r => r.ReservationId == reservationId, ct);
         }
 
         public async Task<Reservation> UpdateReservationAsync(Reservation reservation, CancellationToken ct = default)

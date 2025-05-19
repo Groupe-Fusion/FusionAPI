@@ -11,9 +11,9 @@ namespace FusionAPI.Applicatif.UseCases
         {
             _reservationRepository = reservationRepository;
         }
-        public async Task<Reservation> ExecuteAsync(int userId, CancellationToken ct = default)
+        public async Task<Reservation> ExecuteAsync(int reservationId, CancellationToken ct = default)
         {
-            var reservation = await _reservationRepository.GetReservationByIdAsync(userId, ct);
+            var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId, ct);
             if (reservation == null)
                 throw new InvalidOperationException("Réservation introuvable avec ces ID.");
             return reservation;

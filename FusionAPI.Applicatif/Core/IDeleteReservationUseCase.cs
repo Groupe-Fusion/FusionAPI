@@ -4,6 +4,6 @@ namespace FusionAPI.Applicatif.Core
 {
     public interface IDeleteReservationUseCase
     {
-        Task<Reservation?> ExecuteAsync(int userId, CancellationToken ct = default);
+        Task<Reservation?> ExecuteAsync(int reservationId, CancellationToken ct = default);
     }
 }

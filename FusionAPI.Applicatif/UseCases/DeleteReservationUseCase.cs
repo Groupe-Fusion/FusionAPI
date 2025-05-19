@@ -13,16 +13,16 @@ namespace FusionAPI.Applicatif.UseCases
         public DeleteReservationUseCase(IReservationRepository reservationRepository, IHttpClientFactory httpClientFactory)
         {
             _reservationRepository = reservationRepository;
-            _httpClientUser = httpClientFactory.CreateClient("UserService");
+            //_httpClientUser = httpClientFactory.CreateClient("UserService");
         }
 
-        public async Task<Reservation?> ExecuteAsync(int userId, CancellationToken ct = default)
+        public async Task<Reservation?> ExecuteAsync(int reservationId, CancellationToken ct = default)
         {
-            var response = await _httpClientUser.GetAsync($"api/user/{userId}", ct);
-            if (response.StatusCode != HttpStatusCode.OK)
-                throw new ArgumentException("Book not found");
+            var reservation = await _reservationRepository.GetReservationByIdAsync(reservationId, ct);
+            if (reservation == null)
+                throw new InvalidOperationException("Réservation introuvable avec ces ID.");
 
-            return await _reservationRepository.DeleteReservationAsync(userId, ct);
+            return await _reservationRepository.DeleteReservationAsync(reservationId, ct);
         }
     }
 }

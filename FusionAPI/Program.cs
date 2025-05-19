@@ -42,6 +42,15 @@ builder.Services.AddHttpClient("ReservationService", client =>
 
 // Add services to the container.
 builder.Services.AddControllers();
+
+// PROVOQUE DES JSONS BIZARRE ATTENTION
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+    });
+
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

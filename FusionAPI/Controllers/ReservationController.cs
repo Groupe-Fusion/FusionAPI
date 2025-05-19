@@ -41,7 +41,13 @@ namespace _5MI.ReservationManager.Controllers
                     Description = reservationRequest.Description,
                     UserId = reservationRequest.UserId,
                     CreatedByName = reservationRequest.CreatedByName,
-                    User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name}
+                    User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name},
+                    StartLocation = reservationRequest.StartLocation,
+                    EndLocation = reservationRequest.EndLocation,
+                    Dimension = reservationRequest.Dimension,
+                    Weight = reservationRequest.Weight,
+                    IsNow = reservationRequest.IsNow,
+                    DeliveryDate = reservationRequest.DeliveryDate
                 };
 
                 var result = await _addReservationUseCase.ExecuteAsync(reservation, ct);
@@ -77,12 +83,12 @@ namespace _5MI.ReservationManager.Controllers
         /// <summary>
         /// Récupérer une réservation par son id.
         /// </summary>
-        [HttpGet("{userId}")]
-        public async Task<IActionResult> GetReservationById(int userId, CancellationToken ct)
+        [HttpGet("{reservationId}")]
+        public async Task<IActionResult> GetReservationById(int reservationId, CancellationToken ct)
         {
             try
             {
-                var reservation = await _getReservationByIdUseCase.ExecuteAsync(userId, ct);
+                var reservation = await _getReservationByIdUseCase.ExecuteAsync(reservationId, ct);
                 return Ok(reservation);
             }
             catch (KeyNotFoundException)
@@ -94,12 +100,12 @@ namespace _5MI.ReservationManager.Controllers
         /// <summary>
         /// Supprime une réservation par son id.
         /// </summary>
-        [HttpDelete("{bookId}/{memberId}")]
-        public async Task<IActionResult> DeleteReservation(int userId, CancellationToken ct)
+        [HttpDelete("{reservationId}")]
+        public async Task<IActionResult> DeleteReservation(int reservationId, CancellationToken ct)
         {
             try
             {
-                var reservation = await _deleteReservationUseCase.ExecuteAsync(userId, ct);
+                var reservation = await _deleteReservationUseCase.ExecuteAsync(reservationId, ct);
                 if (reservation is null)
                     return NotFound("Reservation not found");
 
