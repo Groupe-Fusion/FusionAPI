@@ -16,6 +16,12 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Debug Secrets
+        run: |
+          echo "Host: ${{ secrets.SSH_HOST }}"
+          echo "User: ${{ secrets.SSH_USER }}"
+          echo "Private: ${{ secrets.SSH_PRIVATE_KEY }}
+
       - name: Build and Push Docker Image
         run: |
           echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
@@ -33,9 +39,3 @@ jobs:
             docker compose down
             docker pull ghcr.io/${{ github.repository }}:latest
             docker compose up -d
-
-      - name: Debug Secrets
-        run: |
-          echo "Host: ${{ secrets.SSH_HOST }}"
-          echo "User: ${{ secrets.SSH_USER }}"
-          echo "Private: ${{ secrets.SSH_PRIVATE_KEY }}
