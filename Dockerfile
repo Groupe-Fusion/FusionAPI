@@ -12,4 +12,4 @@ RUN dotnet publish FusionAPI/*.csproj -c release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "FusionAPI.dll"]
+ENTRYPOINT ["dotnet", "FusionAPI.Presentation.dll"]
