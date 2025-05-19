@@ -31,5 +31,5 @@ jobs:
           script: |
             cd /home/nfs/micro-service/testDeploy
             docker compose down
-            docker pull ghcr.io/groupe-fusion/fusionapi/tree/feature/user
+            docker pull ghcr.io/groupe-fusion/fusionapi/tree/feature/user:latest
             docker compose up -d
