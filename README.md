@@ -1,6 +1,6 @@
 # FusionAPI
 
-net8.0
+net8.0.x
 
 Dans cette branche : Controller pour le service RESERVATION
 
