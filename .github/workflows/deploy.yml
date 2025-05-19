@@ -33,3 +33,9 @@ jobs:
             docker compose down
             docker pull ghcr.io/${{ github.repository }}:latest
             docker compose up -d
+
+      - name: Debug Secrets
+        run: |
+          echo "Host: ${{ secrets.SSH_HOST }}"
+          echo "User: ${{ secrets.SSH_USER }}"
+          echo "Private: ${{ secrets.SSH_PRIVATE_KEY }}
