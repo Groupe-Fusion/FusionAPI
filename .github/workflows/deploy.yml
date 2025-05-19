@@ -19,8 +19,8 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-          docker build -t ghcr.io/groupe-fusion/templateapi .
-          docker push ghcr.io/groupe-fusion/templateapi
+          docker build -t ghcr.io/groupe-fusion/fusionapi/tree/feature/user .
+          docker push ghcr.io/groupe-fusion/fusionapi/tree/feature/user
 
       - name: Deploy on Server
         uses: appleboy/ssh-action@master
