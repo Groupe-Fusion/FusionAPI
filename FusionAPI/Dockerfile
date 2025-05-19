@@ -1,15 +1,22 @@
-# Use the official .NET SDK image to build the app
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
-WORKDIR /FusionAPI
+# Étape 1 : build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /
 
-# Copy the entire solution directory into the container (including all the projects)
+# Copier le reste du code source
 COPY . .
 
 RUN dotnet restore
-RUN dotnet publish -c release -o /app --no-restore
+RUN dotnet publish FusionAPI/*.csproj -c release -o /app/publish --no-restore
 
-# run the app
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+# Étape 2 : runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app ./
-ENTRYPOINT ["dotnet", "FusionAPI.Presentation.dll"]
+
+# Copier les fichiers publiés depuis l'étape précédente
+COPY --from=build /app/publish .
+
+# Exposer le port (ajuste selon ton appsettings ou ce que Kestrel utilise)
+EXPOSE 8080
+
+# Démarrer l'application
+ENTRYPOINT ["dotnet", "FusionAPI.dll"]
