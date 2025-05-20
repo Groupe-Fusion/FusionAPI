@@ -17,17 +17,17 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/nfs/micro-service/quick-serve/user_api
+            cd /home/nfs/micro-service/quick-serve/payment_api
 
             echo "Pulling latest code..."
             git pull
 
             echo "Stoppin  g existing Docker container..."
-            docker stop user_api_container || true
-            docker rm user_api_container || true
+            docker stop payment_api_container || true
+            docker rm payment_api_container || true
 
             echo "Building Docker image..."
-            docker build -t user_api_image .
+            docker build -t payment_api_image .
 
             echo "Running Docker container..."
-            docker run -d --name user_api_container -p 8083:8080 user_api_image
+            docker run -d --name payment_api_container -p 8083:8080 payment_api_image
