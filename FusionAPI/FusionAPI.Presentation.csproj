@@ -21,4 +21,8 @@
 		<ProjectReference Include="..\FusionAPI.Persistence\FusionAPI.Persistence.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Properties\" />
+	</ItemGroup>
+
 </Project>
