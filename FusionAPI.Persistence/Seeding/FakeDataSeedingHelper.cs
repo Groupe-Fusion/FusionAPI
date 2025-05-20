@@ -16,7 +16,7 @@ namespace FusionAPI.Persistence.Seeding
                 context.SaveChanges();
                 Console.WriteLine($"Generated {NUMBER_OF_USERS} fake users");
             }
-            if (!context.Reservations.Any())
+            if (context.Reservations.Any())
             {
                 List<Reservation> fakeReservations = new ReservationFaker().Generate(NUMBER_OF_USERS);
                 context.Reservations.AddRange(fakeReservations);
