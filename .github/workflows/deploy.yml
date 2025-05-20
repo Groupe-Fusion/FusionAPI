@@ -3,10 +3,7 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # Deploy on branches
-      - feature/localisation
-      - feature/reservation
-      - feature/user
+      - feature/payment
 
 jobs:
   deploy:
