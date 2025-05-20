@@ -47,7 +47,19 @@ namespace _5MI.ReservationManager.Controllers
                     Dimension = reservationRequest.Dimension,
                     Weight = reservationRequest.Weight,
                     IsNow = reservationRequest.IsNow,
-                    DeliveryDate = reservationRequest.DeliveryDate
+                    DeliveryDate = reservationRequest.DeliveryDate,
+                    Category = reservationRequest.Category,
+                    Rating = reservationRequest.Rating,
+                    Price = reservationRequest.Price,
+                    InHour = reservationRequest.InHour,
+                    RecipientName = reservationRequest.RecipientName,
+                    RecipientPhone = reservationRequest.RecipientPhone,
+                    RecipientAddress = reservationRequest.RecipientAddress,
+                    RecipientCity = reservationRequest.RecipientCity,
+                    RecipientPostalCode = reservationRequest.RecipientPostalCode,
+                    PackageType = reservationRequest.PackageType,
+                    isFragile = reservationRequest.isFragile,
+                    ReservationStatus = reservationRequest.ReservationStatus
                 };
 
                 var result = await _addReservationUseCase.ExecuteAsync(reservation, ct);
