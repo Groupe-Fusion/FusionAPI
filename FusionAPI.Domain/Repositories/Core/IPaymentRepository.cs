@@ -12,7 +12,6 @@ namespace FusionAPI.Domain.Repositories.Core
         Task<List<Payment>> GetAllPaymentsAsync(CancellationToken ct = default);
         Task<Payment?> GetPaymentByIdAsync(int paymentId, CancellationToken ct = default);
         Task<Payment> AddPaymentAsync(Payment payment, CancellationToken ct = default);
-        Task<Payment> UpdatePaymentAsync(Payment payment, CancellationToken ct = default);
-        Task<bool> DeletePaymentAsync(int paymentId, CancellationToken ct = default);
+        Task<bool> DeletePaymentByIdAsync(int paymentId, CancellationToken ct = default);
     }
 }

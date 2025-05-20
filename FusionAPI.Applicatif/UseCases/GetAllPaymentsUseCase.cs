@@ -1,4 +1,5 @@
-﻿using FusionAPI.Domain.Models;
+﻿using FusionAPI.Applicatif.Core;
+using FusionAPI.Domain.Models;
 using FusionAPI.Domain.Repositories.Core;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FusionAPI.Applicatif.UseCases
 {
-    public class GetAllPaymentsUseCase
+    public class GetAllPaymentsUseCase : IGetAllPaymentsUseCase
     {
         private readonly IPaymentRepository _paymentRepositories;
         public GetAllPaymentsUseCase(IPaymentRepository paymentRepositories)

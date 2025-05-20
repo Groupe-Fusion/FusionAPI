@@ -1,6 +1,5 @@
 ﻿using FusionAPI.Applicatif.Core;
 using FusionAPI.Domain.Models;
-using FusionAPI.DTO.Requests;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FusionAPI.Controllers
@@ -23,7 +22,7 @@ namespace FusionAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPayment([FromBody] AddPaymentRequest request, CancellationToken ct)
+        public async Task<IActionResult> AddPayment([FromBody] Payment request, CancellationToken ct)
         {
             try
             {
@@ -33,11 +32,23 @@ namespace FusionAPI.Controllers
                 }
                 var payment = new Payment
                 {
+                    FacturationAddress = request.FacturationAddress,
+                    FacturationCity = request.FacturationCity,
+                    FacturationCountry = request.FacturationCountry,
+                    FacturationPostalCode = request.FacturationPostalCode,
+                    CardCvc = request.CardCvc,
+                    ServicePrice = request.ServicePrice,
+                    CardExpiry = request.CardExpiry,
+                    CardNumber = request.CardNumber,
+                    CardOwner = request.CardOwner,
                     DeliveryPrice = request.DeliveryPrice,
-
+                    IsSavedForFutureUse = request.IsSavedForFutureUse,
+                    IsPaid = request.IsPaid,
+                    ReservationId = request.ReservationId,
+                    TotalPrice = request.TotalPrice
                 };
                 var createdPayment = await _addPaymentUseCase.ExecuteAsync(payment, ct);
-                return CreatedAtAction(nameof(GetPaymentById), new { paymentId = createdPayment.Id }, createdPayment);
+                return CreatedAtAction(nameof(GetPaymentById), new { paymentId = createdPayment.PaymentId }, createdPayment);
             }
             catch (Exception ex)
             {
@@ -87,3 +98,4 @@ namespace FusionAPI.Controllers
             }
         }
     }
+}

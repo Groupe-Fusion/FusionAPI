@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace FusionAPI.Persistence.Seeding.Fakers
 {
-    class DbSeeder
+    public class DbSeeder
 	{
         public static void Initialize(IServiceProvider serviceProvider)
 		{

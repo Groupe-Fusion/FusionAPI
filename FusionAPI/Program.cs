@@ -3,7 +3,7 @@ using FusionAPI.Applicatif.UseCases;
 using FusionAPI.Domain.Repositories.Core;
 using FusionAPI.Persistence;
 using FusionAPI.Persistence.Repositories;
-using FusionAPI.Persistence.Seeding;
+using FusionAPI.Persistence.Seeding.Fakers;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,15 +31,31 @@ builder.Services.AddScoped<IPaymentRepository, PaymentRepository>();
 builder.Services.AddTransient<IAddPaymentUseCase, AddPaymentUseCase>();
 builder.Services.AddTransient<IGetAllPaymentsUseCase, GetAllPaymentsUseCase>();
 builder.Services.AddTransient<IGetPaymentByIdUseCase, GetPaymentByIdUseCase>();
+builder.Services.AddTransient<IDeletePaymentByIdUseCase, DeletePaymentByIdUseCase>();
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "*",
+        policy =>
+        {
+            policy.WithOrigins("*") // ou ton frontend (React, Angular, etc.)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseCors("*");
 
 app.UseSwagger();
 app.UseSwaggerUI();
