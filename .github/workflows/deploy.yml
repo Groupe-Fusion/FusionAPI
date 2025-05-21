@@ -30,4 +30,4 @@ jobs:
             docker build -t evaluation_api_image .
 
             echo "Running Docker container..."
-            docker run -d --name evaluation_api_container -p 8083:8080 evaluation_api_image
+            docker run -d --name evaluation_api_container -p 8084:8080 evaluation_api_image
