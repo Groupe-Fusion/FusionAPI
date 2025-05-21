@@ -31,9 +31,9 @@ namespace FusionAPI.Presentation.Controllers
                     FirstName = newUser.FirstName,
                     LastName = newUser.LastName,
                     PhoneNumber = newUser.PhoneNumber,
-                    ConfirmPassword = newUser.ConfirmPassword,
+                    ConfirmPassword = BCrypt.Net.BCrypt.HashPassword(newUser.ConfirmPassword),
                     AcceptConditions = newUser.AcceptConditions,
-                    Password = newUser.Password
+                    Password = BCrypt.Net.BCrypt.HashPassword(newUser.Password),
                 };
 
                 var result = await _addUserUseCase.ExecuteAsync(user, cancellationToken);
