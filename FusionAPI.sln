@@ -12,10 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionAPI.Applicatif", "FusionAPI.Applicatif\FusionAPI.Applicatif.csproj", "{240AB222-94DE-4D03-806D-208BC039629E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{C90FC865-F4E6-4BBD-A75E-BEA59CE0CAF9}"
-	ProjectSection(SolutionItems) = preProject
-		FusionAPI\Dockerfile = FusionAPI\Dockerfile
-		Dockerfile.txt = Dockerfile.txt
-	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionAPI.TestReservation", "FusionAPI.TestReservation\FusionAPI.TestReservation.csproj", "{69B30F54-19DB-4C1F-9B6E-A3FE866BC130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +37,10 @@ Global
 		{240AB222-94DE-4D03-806D-208BC039629E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{240AB222-94DE-4D03-806D-208BC039629E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{240AB222-94DE-4D03-806D-208BC039629E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69B30F54-19DB-4C1F-9B6E-A3FE866BC130}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69B30F54-19DB-4C1F-9B6E-A3FE866BC130}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69B30F54-19DB-4C1F-9B6E-A3FE866BC130}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69B30F54-19DB-4C1F-9B6E-A3FE866BC130}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

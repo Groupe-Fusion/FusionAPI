@@ -8,12 +8,10 @@ namespace FusionAPI.Applicatif.UseCases
     public class AddReservationUseCase : IAddReservationUseCase
     {
         private readonly IReservationRepository _reservationRepository;
-        private readonly HttpClient _httpClientUser;
 
-        public AddReservationUseCase(IReservationRepository reservationRepository, IHttpClientFactory httpClientFactory)
+        public AddReservationUseCase(IReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
-            _httpClientUser = httpClientFactory.CreateClient("UserService");
         }
 
         public async Task<Reservation> ExecuteAsync(Reservation newReservation, CancellationToken ct = default)

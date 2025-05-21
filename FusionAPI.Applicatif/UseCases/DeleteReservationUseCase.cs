@@ -8,12 +8,10 @@ namespace FusionAPI.Applicatif.UseCases
     public class DeleteReservationUseCase : IDeleteReservationUseCase
     {
         private readonly IReservationRepository _reservationRepository;
-        private readonly HttpClient _httpClientUser;
 
-        public DeleteReservationUseCase(IReservationRepository reservationRepository, IHttpClientFactory httpClientFactory)
+        public DeleteReservationUseCase(IReservationRepository reservationRepository)
         {
             _reservationRepository = reservationRepository;
-            //_httpClientUser = httpClientFactory.CreateClient("UserService");
         }
 
         public async Task<Reservation?> ExecuteAsync(int reservationId, CancellationToken ct = default)
