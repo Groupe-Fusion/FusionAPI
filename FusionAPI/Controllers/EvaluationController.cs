@@ -41,26 +41,46 @@ namespace FusionAPI.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetEvaluationByIdAsync(int id, CancellationToken ct)
+        [HttpGet("{evaluationId}")]
+        [ActionName(nameof(GetEvaluationByIdAsync))]
+        public async Task<IActionResult> GetEvaluationByIdAsync(int evaluationId, CancellationToken ct)
         {
-            var evaluation = await _getEvaluationByIdUseCase.ExecuteAsync(id, ct);
-            if (evaluation == null)
+            try
             {
-                return NotFound();
+                var evaluation = await _getEvaluationByIdUseCase.ExecuteAsync(evaluationId, ct);
+                return evaluation != null ? Ok(evaluation) : NotFound();
             }
-            return Ok(evaluation);
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEvaluationAsync([FromBody] Evaluation evaluation, CancellationToken ct)
+        public async Task<IActionResult> AddEvaluationAsync([FromBody] Evaluation request, CancellationToken ct)
         {
-            if (evaluation == null)
+            try
             {
-                return BadRequest("Evaluation cannot be null.");
+                if (request == null)
+                {
+                    return BadRequest("Invalid evaluation data");
+                }
+                var evaluation = new Evaluation
+                {
+                    Rating = request.Rating,
+                    Comment = request.Comment,
+                    CreatedAt = request.CreatedAt,
+                    UserId = request.UserId,
+                    ReservationId = request.ReservationId,
+                    UpdatedAt = request.UpdatedAt
+                };
+                var createdEvaluation = await _addEvaluationUseCase.ExecuteAsync(evaluation, ct);
+                return CreatedAtAction(nameof(GetEvaluationByIdAsync), new { evaluationId = createdEvaluation.Id }, createdEvaluation);
             }
-            var addedEvaluation = await _addEvaluationUseCase.ExecuteAsync(evaluation, ct);
-            return CreatedAtAction(nameof(GetEvaluationByIdAsync), new { id = addedEvaluation.Id }, addedEvaluation);
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
     }
 }
