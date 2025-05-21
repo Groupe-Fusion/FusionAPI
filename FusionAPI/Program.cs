@@ -44,7 +44,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "*",
         policy =>
         {
-            policy.WithOrigins("*") // ou ton frontend (React, Angular, etc.)
+            policy.AllowAnyOrigin() // ou ton frontend (React, Angular, etc.)
                   .AllowAnyHeader()
                   .AllowAnyMethod();
         });
