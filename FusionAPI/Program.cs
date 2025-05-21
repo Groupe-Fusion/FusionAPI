@@ -30,6 +30,7 @@ builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
 // fusion inject use cases
 builder.Services.AddTransient<IAddReservationUseCase, AddReservationUseCase>();
+builder.Services.AddTransient<IUpdateReservationUseCase, UpdateReservationUseCase>();
 builder.Services.AddTransient<IGetAllReservationsUseCase, GetAllReservationsUseCase>();
 builder.Services.AddTransient<IGetReservationByIdUseCase, GetReservationByIdUseCase>();
 builder.Services.AddTransient<IDeleteReservationUseCase, DeleteReservationUseCase>();

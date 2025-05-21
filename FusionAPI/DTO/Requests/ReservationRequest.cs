@@ -24,5 +24,7 @@
         public string PackageType { get; set; } = string.Empty;
         public bool isFragile { get; set; } = false;
         public string ReservationStatus { get; set; } = string.Empty;
+
+        public int? PrestataireId { get; set; }
     }
 }

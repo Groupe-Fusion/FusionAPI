@@ -9,6 +9,9 @@
         public int UserId { get; set; }
         public required virtual User User { get; set; }
 
+        public int? PrestataireId { get; set; }
+        public virtual User? Prestataire { get; set; }
+
         public string CreatedByName { get; set; } = string.Empty;
         public string StartLocation { get; set; } = string.Empty;
         public string EndLocation { get; set; } = string.Empty;

@@ -22,6 +22,12 @@ namespace FusionAPI.Persistence
                 .HasMany(b => b.Reservations)
                 .WithOne(r => r.User)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Reservation>()
+                .HasOne(r => r.Prestataire)
+                .WithMany(p => p.Prestations)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

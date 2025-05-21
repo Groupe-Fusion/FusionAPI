@@ -10,12 +10,14 @@ namespace _5MI.ReservationManager.Controllers
     public class ReservationController : ControllerBase
     {
         private readonly IAddReservationUseCase _addReservationUseCase;
+        private readonly IUpdateReservationUseCase _updateReservationUseCase;
         private readonly IGetAllReservationsUseCase _getAllReservationsUseCase;
         private readonly IGetReservationByIdUseCase _getReservationByIdUseCase;
         private readonly IDeleteReservationUseCase _deleteReservationUseCase;
 
         public ReservationController(
             IAddReservationUseCase addReservationUseCase,
+            IUpdateReservationUseCase updateReservationUseCase,
             IGetAllReservationsUseCase getAllReservationsUseCase,
             IGetReservationByIdUseCase getReservationByIdUseCase,
             IDeleteReservationUseCase deleteReservationUseCase)
@@ -24,6 +26,7 @@ namespace _5MI.ReservationManager.Controllers
             _getAllReservationsUseCase = getAllReservationsUseCase;
             _getReservationByIdUseCase = getReservationByIdUseCase;
             _deleteReservationUseCase = deleteReservationUseCase;
+            _updateReservationUseCase = updateReservationUseCase;
         }
 
         /// <summary>
@@ -101,6 +104,58 @@ namespace _5MI.ReservationManager.Controllers
             try
             {
                 var reservation = await _getReservationByIdUseCase.ExecuteAsync(reservationId, ct);
+                return Ok(reservation);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"reservation Not found");
+            }
+        }
+
+        /// <summary>
+        /// Récupérer une réservation par son id.
+        /// </summary>
+        [HttpPut("{reservationId}")]
+        public async Task<IActionResult> UpdateReservationById(
+            [FromBody] ReservationRequest reservationRequest,
+            int reservationId,  
+            CancellationToken ct)
+        {
+            try
+            {
+                var reservation = new Reservation
+                {
+                    Name = reservationRequest.Name,
+                    Description = reservationRequest.Description,
+                    UserId = reservationRequest.UserId,
+                    PrestataireId = reservationRequest.PrestataireId,
+                    CreatedByName = reservationRequest.CreatedByName,
+                    User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name },
+                    StartLocation = reservationRequest.StartLocation,
+                    EndLocation = reservationRequest.EndLocation,
+                    Dimension = reservationRequest.Dimension,
+                    Weight = reservationRequest.Weight,
+                    IsNow = reservationRequest.IsNow,
+                    DeliveryDate = reservationRequest.DeliveryDate,
+                    Category = reservationRequest.Category,
+                    Rating = reservationRequest.Rating,
+                    Price = reservationRequest.Price,
+                    InHour = reservationRequest.InHour,
+                    RecipientName = reservationRequest.RecipientName,
+                    RecipientPhone = reservationRequest.RecipientPhone,
+                    RecipientAddress = reservationRequest.RecipientAddress,
+                    RecipientCity = reservationRequest.RecipientCity,
+                    RecipientPostalCode = reservationRequest.RecipientPostalCode,
+                    PackageType = reservationRequest.PackageType,
+                    isFragile = reservationRequest.isFragile,
+                    ReservationStatus = reservationRequest.ReservationStatus
+                };
+
+                reservation = await _updateReservationUseCase.ExecuteAsync(
+                    reservationId,
+                    reservation, 
+                    ct);
+
                 return Ok(reservation);
             }
             catch (KeyNotFoundException)

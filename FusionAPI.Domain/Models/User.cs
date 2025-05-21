@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace FusionAPI.Domain.Models
+﻿namespace FusionAPI.Domain.Models
 {
     public class User
     {
@@ -12,5 +10,6 @@ namespace FusionAPI.Domain.Models
 
         // FK
         public virtual ICollection<Reservation> Reservations { get; set; } = [];
+        public virtual ICollection<Reservation> Prestations { get; set;} = [];
     }
 }
