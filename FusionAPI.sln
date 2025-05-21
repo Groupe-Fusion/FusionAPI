@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionAPI.Persistence", "Fu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FusionAPI.Applicatif", "FusionAPI.Applicatif\FusionAPI.Applicatif.csproj", "{240AB222-94DE-4D03-806D-208BC039629E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{E493B115-0F73-48A1-BF15-E36B75C694EF}"
+	ProjectSection(SolutionItems) = preProject
+		FusionAPI\Dockerfile = FusionAPI\Dockerfile
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
