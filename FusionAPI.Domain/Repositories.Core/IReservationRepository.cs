@@ -9,5 +9,7 @@ namespace FusionAPI.Domain.Repositories.Core
         Task<Reservation> AddReservationAsync(Reservation reservation, CancellationToken ct = default);
         Task<Reservation> UpdateReservationAsync(Reservation reservation, CancellationToken ct = default);
         Task<Reservation> DeleteReservationAsync(int reservationId, CancellationToken ct = default);
+
+        Task<List<Reservation?>> GetAllReservationsByUserIdAsync(int userId, CancellationToken ct = default);
     }
 }

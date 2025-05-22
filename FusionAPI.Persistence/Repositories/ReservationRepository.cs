@@ -11,8 +11,6 @@ namespace FusionAPI.Persistence.Repositories
         public async Task<Reservation> AddReservationAsync(Reservation reservation, CancellationToken ct = default)
         {
             var user = await _context.Users.FindAsync(new object[] { reservation.UserId }, ct);
-            if (user is null)
-                throw new ArgumentException("user not found");
 
             _context.Reservations.Add(reservation);
             await _context.SaveChangesAsync(ct);
@@ -47,6 +45,13 @@ namespace FusionAPI.Persistence.Repositories
             _context.Reservations.Update(reservation);
             await _context.SaveChangesAsync(ct);
             return reservation;
+        }
+
+        public Task<List<Reservation?>> GetAllReservationsByUserIdAsync(int userId, CancellationToken ct = default)
+        {
+            return _context.Reservations
+                .Where(r => r.UserId == userId)
+                .ToListAsync(ct);
         }
     }
 }

@@ -7,7 +7,7 @@
         public string Description { get; set; } = string.Empty;
 
         public int UserId { get; set; }
-        public required virtual User User { get; set; }
+        public virtual User? User { get; set; }
 
         public int? PrestataireId { get; set; }
         public virtual User? Prestataire { get; set; }

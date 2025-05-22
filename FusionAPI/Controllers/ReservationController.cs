@@ -14,19 +14,22 @@ namespace _5MI.ReservationManager.Controllers
         private readonly IGetAllReservationsUseCase _getAllReservationsUseCase;
         private readonly IGetReservationByIdUseCase _getReservationByIdUseCase;
         private readonly IDeleteReservationUseCase _deleteReservationUseCase;
+        private readonly IGetAllReservationsByUserIdUseCase _getAllReservationsByUserIdUseCase;
 
         public ReservationController(
             IAddReservationUseCase addReservationUseCase,
             IUpdateReservationUseCase updateReservationUseCase,
             IGetAllReservationsUseCase getAllReservationsUseCase,
             IGetReservationByIdUseCase getReservationByIdUseCase,
-            IDeleteReservationUseCase deleteReservationUseCase)
+            IDeleteReservationUseCase deleteReservationUseCase,
+            IGetAllReservationsByUserIdUseCase getAllReservationsByUserIdUseCase)
         {
             _addReservationUseCase = addReservationUseCase;
             _getAllReservationsUseCase = getAllReservationsUseCase;
             _getReservationByIdUseCase = getReservationByIdUseCase;
             _deleteReservationUseCase = deleteReservationUseCase;
             _updateReservationUseCase = updateReservationUseCase;
+            _getAllReservationsByUserIdUseCase = getAllReservationsByUserIdUseCase;
         }
 
         /// <summary>
@@ -37,14 +40,13 @@ namespace _5MI.ReservationManager.Controllers
         {
             try
             {
-                // Map ReservationRequest to Reservation
                 var reservation = new Reservation
                 {
                     Name = reservationRequest.Name,
                     Description = reservationRequest.Description,
                     UserId = reservationRequest.UserId,
                     CreatedByName = reservationRequest.CreatedByName,
-                    User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name},
+                    //User = new User { FirstName = reservationRequest.CreatedByName, LastName = reservationRequest.CreatedByName },
                     StartLocation = reservationRequest.StartLocation,
                     EndLocation = reservationRequest.EndLocation,
                     Dimension = reservationRequest.Dimension,
@@ -181,6 +183,20 @@ namespace _5MI.ReservationManager.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"Error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetReservationByUserId(int userId, CancellationToken ct)
+        {
+            try
+            {
+                var reservation = await _getAllReservationsByUserIdUseCase.ExecuteAsync(userId, ct);
+                return Ok(reservation);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"reservation Not found");
             }
         }
     }

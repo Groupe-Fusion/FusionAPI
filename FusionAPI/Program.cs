@@ -34,6 +34,7 @@ builder.Services.AddTransient<IUpdateReservationUseCase, UpdateReservationUseCas
 builder.Services.AddTransient<IGetAllReservationsUseCase, GetAllReservationsUseCase>();
 builder.Services.AddTransient<IGetReservationByIdUseCase, GetReservationByIdUseCase>();
 builder.Services.AddTransient<IDeleteReservationUseCase, DeleteReservationUseCase>();
+builder.Services.AddTransient<IGetAllReservationsByUserIdUseCase, GetAllReservationsByUserIdUseCase>();
 
 // Add HttpClient service
 builder.Services.AddHttpClient("ReservationService", client =>

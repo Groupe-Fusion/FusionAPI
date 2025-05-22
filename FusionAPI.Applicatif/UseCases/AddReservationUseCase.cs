@@ -16,10 +16,6 @@ namespace FusionAPI.Applicatif.UseCases
 
         public async Task<Reservation> ExecuteAsync(Reservation newReservation, CancellationToken ct = default)
         {
-            /*var response = await _httpClientUser.GetAsync($"api/reservations/{newReservation.ReservationId}", ct);
-            if (response.StatusCode != HttpStatusCode.OK)
-                throw new ArgumentException("Reservation not found");*/
-
             await _reservationRepository.AddReservationAsync(newReservation, ct);
 
             return newReservation;
