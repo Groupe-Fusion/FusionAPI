@@ -132,7 +132,7 @@ namespace _5MI.ReservationManager.Controllers
                     UserId = reservationRequest.UserId,
                     PrestataireId = reservationRequest.PrestataireId,
                     CreatedByName = reservationRequest.CreatedByName,
-                    User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name },
+                    //User = new User { FirstName = reservationRequest.Name, LastName = reservationRequest.Name },
                     StartLocation = reservationRequest.StartLocation,
                     EndLocation = reservationRequest.EndLocation,
                     Dimension = reservationRequest.Dimension,
