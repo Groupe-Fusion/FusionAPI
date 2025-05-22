@@ -3,25 +3,13 @@ name: Deploy to Server
 on:
   push:
     branches:
-      - master  # Deploy on branches
       - feature/localisation
-      - feature/reservation
-      - feature/user
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Build and Push Docker Image
-        run: |
-          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
-          docker build -t ghcr.io/groupe-fusion/templateapi .
-          docker push ghcr.io/groupe-fusion/templateapi
-
       - name: Deploy on Server
         uses: appleboy/ssh-action@master
         with:
@@ -29,7 +17,17 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/nfs/micro-service/testDeploy
-            docker compose down
-            docker pull ghcr.io/${{ github.repository }}:latest
-            docker compose up -d
+            cd /home/nfs/micro-service/quick-serve/localisation_api
+
+            echo "Pulling latest code..."
+            git pull
+
+            echo "Stoppin  g existing Docker container..."
+            docker stop localisation_api_container || true
+            docker rm localisation_api_container || true
+
+            echo "Building Docker image..."
+            docker build -t localisation_api_image .
+
+            echo "Running Docker container..."
+            docker run -d --name localisation_api_container -p 8085:8080 localisation_api_image
